@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sortfy</title>
+  <link rel="icon" href="assets/logo baru.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-leaf">
+          <img src="assets/logo baru.png">
+        </span>
+        <span>Sortfy</span>
+      </a>
+      <ul class="nav-links">
+      </ul>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="badge">Cerdas Memilah, Lebih Hijau</div>
+      <h1 class="hero-title">
+        Kenali Sampahmu,<br />
+        <em>Selamatkan Bumi</em>
+      </h1>
+      <p class="hero-desc">
+        Foto sampahmu, dan biarkan AI kami membantu menentukan jenisnya
+        sekaligus cara terbaik untuk mengelolanya.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="scrollToScan()">
+          <span><i class="bi bi-camera"></i></span> Mulai Klasifikasi
+        </button>
+        <a href="#cara-kerja" class="btn-ghost">Pelajari Lebih →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>2 Kategori</strong><span>Organik & Anorganik</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>Gratis</strong><span>Tanpa biaya</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>Mudah</strong><span>Foto langsung hasil</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/pohon.png" class="hero-tree-img" alt="Pohon EcoScan" />
+    </div>
+
+  </section>
+
+  <section class="how-it-works" id="cara-kerja">
+    <div class="container">
+      <div class="section-label">Cara Kerja</div>
+      <h2 class="section-title">Tiga Langkah<br /><em>Sederhana</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">
+            <i class="bi bi-camera-fill"></i>
+          </div>
+          <h3>Upload atau Foto</h3>
+          <p>Ambil foto sampah langsung dari kamera atau unggah dari galeri perangkatmu.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">
+            <i class="bi bi-robot"></i>
+          </div>
+          <h3>Analisis AI</h3>
+          <p>Model machine learning kami menganalisis gambar untuk mendeteksi jenis sampah.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">
+            <i class="fa-solid fa-arrows-spin"></i>
+          </div>
+          <h3>Hasil & Saran</h3>
+          <p>Dapatkan hasil klasifikasi beserta panduan pengelolaan sampah yang tepat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scan-section" id="scan">
+    <div class="container">
+      <div class="section-label">Mulai Sekarang</div>
+      <h2 class="section-title">Klasifikasi<br /><em>Sampahmu</em></h2>
+
+      <div class="scan-card">
+        <div class="upload-area" id="uploadArea" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)">
+          <div class="upload-idle" id="uploadIdle">
+            <div class="upload-icon-wrap">
+              <div class="upload-icon">
+                <i class="bi bi-images"></i>
+              </div>
+            </div>
+            <p class="upload-title">Seret & lepas gambar di sini</p>
+            <p class="upload-sub">atau klik untuk memilih dari galeri</p>
+            <div class="upload-divider"><span>atau</span></div>
+            <button class="btn-camera" onclick="openCamera(event)">
+              <span>
+                <i class="bi bi-camera-fill"></i>
+              </span> Buka Kamera
+            </button>
+          </div>
+          <div class="upload-preview" id="uploadPreview" style="display:none;">
+            <img id="previewImg" src="" alt="Preview" />
+            <button class="change-btn" onclick="resetUpload(event)">✕ Ganti Gambar</button>
+          </div>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*" hidden onchange="handleFileSelect(event)" />
+
+        <div class="camera-modal" id="cameraModal" style="display:none;">
+          <div class="camera-inner">
+            <div class="camera-header">
+              <span>Kamera</span>
+              <button onclick="closeCamera()">✕</button>
+            </div>
+            <video id="cameraVideo" autoplay playsinline></video>
+            <div class="camera-controls">
+              <button class="btn-capture" onclick="capturePhoto()">
+                  <i class="fa-solid fa-camera"></i>
+                Ambil Foto
+            </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="scan-action">
+          <button class="btn-scan" id="btnScan" onclick="startClassification()" disabled>
+            <span class="btn-scan-icon">
+              <i class="bi bi-search"></i>
+            </span>
+            <span>Klasifikasi Sekarang</span>
+          </button>
+          <p class="scan-note">Gambar tidak disimpan di server kami</p>
+        </div>
+      </div>
+
+      <div class="result-card" id="resultCard" style="display:none;">
+        <div class="result-header">
+          <div class="result-badge" id="resultBadge"></div>
+          <div class="result-title-wrap">
+            <p class="result-label">Hasil Klasifikasi</p>
+            <h3 class="result-type" id="resultType"></h3>
+          </div>
+          <div class="result-confidence">
+            <div class="confidence-ring">
+              <svg viewBox="0 0 60 60">
+                <circle cx="30" cy="30" r="24" fill="none" stroke="#e8ede4" stroke-width="5"/>
+                <circle cx="30" cy="30" r="24" fill="none" stroke="#4a7c59" stroke-width="5"
+                  stroke-dasharray="150.8" stroke-dashoffset="37.7"
+                  stroke-linecap="round" transform="rotate(-90 30 30)"
+                  id="confidenceCircle"/>
+              </svg>
+              <span id="confidenceText">75%</span>
+            </div>
+            <p>Akurasi</p>
+          </div>
+        </div>
+        <p class="result-desc" id="resultDesc"></p>
+
+        <div class="result-tips">
+          <h4>Saran Pengelolaan</h4>
+          <ul id="resultTips"></ul>
+        </div>
+
+        <div class="result-subcategory" id="resultSubcategory"></div>
+
+        <button class="btn-reset" onclick="fullReset()">↩ Scan Sampah Lain</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="tentang">
+    <div class="container">
+      <div class="section-label">Kategori Sampah</div>
+      <h2 class="section-title">Yang Bisa<br /><em>Kami Kenali</em></h2>
+      <div class="cat-grid">
+        <div class="cat-card cat-organic">
+          <div class="cat-emoji">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+          <h3>Organik</h3>
+          <p>Sampah yang berasal dari makhluk hidup dan dapat terurai secara alami.</p>
+          <ul>
+            <li>Sisa makanan & sayuran</li>
+            <li>Daun dan ranting</li>
+            <li>Kulit buah</li>
+            <li>Kertas & kardus basah</li>
+          </ul>
+          <div class="cat-tag">
+            <i class="fa-brands fa-pagelines"></i>
+            Bisa dikompos
+          </div>
+        </div>
+        <div class="cat-card cat-inorganic">
+          <div class="cat-emoji">
+            <i class="fa-solid fa-bottle-droplet"></i>          
+          </div>
+          <h3>Anorganik</h3>
+          <p>Sampah buatan manusia yang butuh waktu lama untuk terurai.</p>
+          <ul>
+            <li>Plastik & botol</li>
+            <li>Kaca & logam</li>
+            <li>Elektronik</li>
+            <li>Kain sintetis</li>
+          </ul>
+          <div class="cat-tag">
+            <i class="fa-solid fa-recycle"></i>
+            Bisa didaur ulang
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-leaf">
+          <img src="assets/logo baru.png">
+        </span>
+        <span class="footer-name">Sortfy</span>
+        <p>Sistem Klasifikasi Sampah Berbasis Web <br>Dibuat untuk lingkungan yang lebih baik</p>
+      </div>
+      <p class="footer-note"></p>
+    </div>
+  </footer>
+
+  <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+    <div class="loading-box">
+      <div class="loading-spinner"></div>
+      <p>Menganalisis gambar...</p>
+      <span>Mohon tunggu sebentar</span>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
