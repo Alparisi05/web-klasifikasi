@@ -14,7 +14,6 @@ export default function ScanSection() {
   const fileInputRef = useRef(null);
   const videoRef = useRef(null);
 
-  // Clean up object URL when previewUrl changes to prevent memory leaks
   useEffect(() => {
     return () => {
       if (previewUrl) {
@@ -23,7 +22,6 @@ export default function ScanSection() {
     };
   }, [previewUrl]);
 
-  // Clean up camera stream tracks when stream changes or unmounts
   useEffect(() => {
     return () => {
       if (cameraStream) {
@@ -32,7 +30,6 @@ export default function ScanSection() {
     };
   }, [cameraStream]);
 
-  // Attach stream to video element when camera is opened
   useEffect(() => {
     if (cameraStream && videoRef.current) {
       videoRef.current.srcObject = cameraStream;
@@ -40,7 +37,7 @@ export default function ScanSection() {
   }, [cameraStream, isCameraOpen]);
 
   const triggerFileInput = () => {
-    if (previewUrl) return; // disable trigger if preview is shown
+    if (previewUrl) return;
     fileInputRef.current?.click();
   };
 
@@ -73,7 +70,7 @@ export default function ScanSection() {
     setSelectedFile(file);
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
-    setPredictionResult(null); // Hide previous prediction results
+    setPredictionResult(null);
   };
 
   const resetUpload = (e) => {
