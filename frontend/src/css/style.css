@@ -40,7 +40,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: url('../assets/Sunset.jpeg') no-repeat center center fixed;
+  background: url('/assets/Sunset.jpeg') no-repeat center center fixed;
   background-size: cover;
   opacity: 0.15;
   z-index: -2;
@@ -340,6 +340,7 @@ body::before {
 }
 .result-badge.organic   { background: #d4f0dc; }
 .result-badge.inorganic { background: #dce8f5; }
+.result-badge.danger    { background: #fce8e6; }
 .result-title-wrap { flex: 1; }
 .result-label { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-soft); }
 .result-type { font-family: var(--font-display); font-size: 1.8rem; color: var(--text-dark); }
@@ -370,7 +371,7 @@ body::before {
 .result-subcategory {
   background: var(--earth-light); border-radius: var(--radius-sm);
   padding: 16px 20px; font-size: .88rem; color: var(--earth-brown);
-  margin-bottom: 28px; font-weight: 500; display: none;
+  margin-bottom: 28px; font-weight: 500;
 }
 
 .btn-reset {

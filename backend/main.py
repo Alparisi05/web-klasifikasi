@@ -22,7 +22,8 @@ app.add_middleware(
 MODEL_PATH = "garbage_classifier_final.keras"
 DATA_PATH = "garbage_classification"
 IMG_SIZE = (224, 224)
-CLASS_NAME = os.listdir(DATA_PATH)
+
+CLASS_NAME = sorted(os.listdir(DATA_PATH))
 
 # load model
 model = tf.keras.models.load_model(MODEL_PATH)
@@ -49,7 +50,6 @@ def postprocessing(pred_class):
     else:
         return "danger"
 
-
 @app.get("/")
 def read_root():
     return {"message": "API model Garbage Classifier"}
@@ -66,7 +66,12 @@ async def predict(file: UploadFile):
     confidence = round(float(100 * np.max(predictions)), 3)
 
     category = postprocessing(predicted_class)
-    recom = recommendation(category)
+    
+    try:
+        recom = recommendation(category)
+    except Exception as e:
+        print(f"Gagal mengambil rekomendasi OpenRouter: {e}")
+        recom = "Rekomendasi edukasi gagal dimuat karena kendala jaringan API, namun sampah Anda berhasil dikategorikan."
 
     return {
         "filename": file.filename,
