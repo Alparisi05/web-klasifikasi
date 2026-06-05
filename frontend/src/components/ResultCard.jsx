@@ -38,7 +38,7 @@ export default function ResultCard({ data, onReset }) {
         <div className="result-title-wrap">
           <p className="result-label">Hasil Klasifikasi</p>
           <h3 className="result-type" id="resultType">
-            {data.class || '-'}
+            {data.category || '-'}
           </h3>
         </div>
         <div className="result-confidence">
@@ -71,13 +71,13 @@ export default function ResultCard({ data, onReset }) {
       <div className="result-tips">
         <h4>Kategori Sampah</h4>
         <ul id="resultTips">
-          <li>Kategori: {data.category}</li>
+          <li>Jenis: {data.class}</li>
           <li>Tingkat keyakinan model: {pct}%</li>
         </ul>
       </div>
 
       <div className="result-subcategory" id="resultSubcategory" style={{ display: 'block' }}>
-        📁 Hasil klasifikasi: {data.class}
+        📁 Hasil klasifikasi: {data.category}
       </div>
 
       <button className="btn-reset" onClick={onReset}>
